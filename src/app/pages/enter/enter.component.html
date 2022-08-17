@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-12 col-lg-7">
+        <form [formGroup]="formData" (ngSubmit)="submitForm()">
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" id="enter-name" class="form-control" formControlName="name" [class.is-invalid]="submitted && formData.controls['name'].errors">
+                <div class="form-text text-danger" *ngIf="submitted && formData.controls['name'].errors?.['required']">Name is required.</div>
+                <div class="form-text text-danger" *ngIf="submitted && formData.controls['name'].errors?.['pattern']">Name cannot contain any numbers.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" id="enter-username" class="form-control" formControlName="username" [class.is-invalid]="submitted && formData.controls['username'].errors">
+                <div class="form-text text-danger" *ngIf="submitted && formData.controls['username'].errors?.['email']">Username must be an email address.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Country</label>
+                <select id="enter-country" class="form-select" formControlName="country" [class.is-invalid]="submitted && formData.controls['country'].errors">
+                    <option selected disabled>Select Country</option>
+                    <option value="Ireland">Ireland</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                </select>
+                <div class="form-text text-danger" *ngIf="submitted && formData.controls['country'].errors?.['required']">Country is required.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Post Code</label>
+                <input type="text" id="enter-postCode" class="form-control" formControlName="postCode" [class.is-invalid]="submitted && formData.controls['postCode'].errors">
+                <div class="form-text text-danger" *ngIf="submitted && formData.controls['postCode'].errors?.['required']">Post Code is required.</div>
+                <div class="form-text text-danger" *ngIf="submitted && formData.controls['postCode'].errors?.['pattern']">Wrong pattern.</div>
+                <div class="form-text text-danger" *ngIf="submitted && (formData.controls['postCode'].errors?.['minlength'] || formData.controls['postCode'].errors?.['maxlength'])">Post Code must be between 6-10 characters long.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Favourite Movie</label>
+                <input type="text" id="enter-favouriteMovie" class="form-control" formControlName="favouriteMovie" [ngbTypeahead]="search" [class.is-invalid]="submitted && formData.controls['favouriteMovie'].errors">
+                <div class="form-text text-danger" *ngIf="submitted && formData.controls['favouriteMovie'].errors?.['required']">Favourite Movie is required.</div>
+            </div>
+            <div class="text-end">
+                <button type="button" class="btn btn-light">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

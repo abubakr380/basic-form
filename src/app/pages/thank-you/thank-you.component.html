@@ -1,0 +1,9 @@
+<div>
+    <div *ngFor="let item of enterData | keyvalue:keepOrder">
+        <span>{{displayNames[item.key]}}: </span>
+        <span>{{item.value}}</span>
+    </div>
+    <div *ngIf="!enterData">
+        <span>No data found</span>
+    </div>
+</div>

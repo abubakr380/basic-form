@@ -1,0 +1,37 @@
+nav.navbar {
+    border: 0;
+    margin-bottom: 0;
+    color: #ffffff;
+    padding: 0;
+}
+
+nav.navbar div.container-fluid {
+    background-color: #00a0a0;
+}
+
+nav.navbar div.container-fluid a.navbar-brand {
+    color: #fff;
+    font-size: 32px;
+}
+
+div.main-body-content {
+    height: calc(100vh - 102px);
+    overflow: auto;
+    padding: 60px 30px;
+    background-color: #fdfff0;
+    color: #414141;
+}
+
+div.main-body-content .page-headline {
+    text-shadow: 2px 2px #b8baab;
+}
+
+footer {
+    background-color: #008080;
+    color: #fff;
+}
+
+footer div.container {
+    padding: 10px;
+    text-align: center;
+}
