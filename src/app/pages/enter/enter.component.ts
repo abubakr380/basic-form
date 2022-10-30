@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { catchError, debounceTime, distinctUntilChanged, map, Observable, of, OperatorFunction, switchMap, tap } from 'rxjs';
 import { EnterService } from '../../services/enter.service';
 import { MoviesService } from '../../services/movies.service';
+import { SearchResultModel } from '../../models/movies.model';
 
 @Component({
   selector: 'app-enter',
@@ -45,7 +46,25 @@ export class EnterComponent implements OnInit {
       tap(() => this.searching = true),
       switchMap((term: string) =>
         this.moviesService.searchMovies(term).pipe(
-          map(response => response.Search.map(searchResult => searchResult.Title)),
+          map(response => {
+            let yearsDict: { [id: string]: SearchResultModel[] } = {};
+            response.Search.forEach(movie => {
+              if (!yearsDict[movie.Year]) {
+                yearsDict[movie.Year] = [];
+              }
+              yearsDict[movie.Year].push(movie);
+            });
+            console.log(yearsDict);
+            
+            let keys = Object.keys(yearsDict).sort().reverse();
+            let yearsArray: SearchResultModel[][] = [];
+            for(let i in keys) {
+              yearsArray[yearsArray.length] = yearsDict[keys[i]];
+            }
+            console.log(yearsArray);
+            
+            return response.Search.map(searchResult => searchResult.Title);
+          }),
           tap(() => this.searchFailed = false),
           catchError(() => {
             this.searchFailed = true;
